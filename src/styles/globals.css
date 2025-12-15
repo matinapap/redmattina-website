@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+/* Light mode defaults */
+:root {
+  --background: #0a0a0a; /* Αν θες να μην φαίνεται "γραμμή", κάνε το #000 */
+  --foreground: #000000;
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #000000; /* Αν θες να μην φαίνεται "γραμμή", κάνε το #000 */
+    --foreground: #ededed;
+  }
+}
+
+/* HEADER styling (όλο το inline CSS από το component) */
+.header {
+  background-color: #000000; /* από το inline style */
+}
+
+/* Remove default inline-image gap */
+img {
+  display: block;
+  margin: 0; /* έβγαλα το άκυρο margin-top: 10; */
+}
+
+/* Global body styling */
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
