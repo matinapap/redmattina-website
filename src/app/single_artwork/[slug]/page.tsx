@@ -1,52 +1,39 @@
 import Image from "next/image";
+import { notFound } from "next/navigation";
+import { artworks, getArtworkBySlug } from "@/data/artworks";
 
-interface Props {
+type SingleArtworkPageProps = {
   params: Promise<{
     slug: string;
   }>;
+};
+
+export function generateStaticParams() {
+  return artworks.map((artwork) => ({
+    slug: artwork.slug,
+  }));
 }
 
-const artworks = [
-  {
-    slug: "redmattina-1",
-    src: "/images/redmattina_main_collage.png",
-    alt: "Work 1",
-  },
-  {
-    slug: "redmattina-2",
-    src: "/images/redmattina_main_collage.png",
-    alt: "Work 2",
-  },
-  {
-    slug: "work-3",
-    src: "/images/a.png",
-    alt: "Work 3",
-  },
-];
-
-export default async function SingleArtworkPage({ params }: Props) {
+export default async function SingleArtworkPage({
+  params,
+}: SingleArtworkPageProps) {
   const { slug } = await params;
-
-  const artwork = artworks.find(a => a.slug === slug);
-
+  const artwork = getArtworkBySlug(slug);
   if (!artwork) {
-    return (
-      <main className="min-h-screen bg-black text-white flex items-center justify-center">
-        Artwork not found
-      </main>
-    );
+    notFound();
   }
 
   return (
-    <main className="min-h-screen bg-black flex items-center justify-center px-10">
+    <section className="flex min-h-full items-center justify-center bg-black px-6 py-10 sm:px-10">
       <Image
         src={artwork.src}
         alt={artwork.alt}
-        width={1400}
-        height={900}
-        className="w-full max-w-6xl h-auto object-contain"
+        width={artwork.width}
+        height={artwork.height}
+        sizes="100vw"
+        className="h-auto w-full max-w-6xl object-contain"
         priority
       />
-    </main>
+    </section>
   );
 }

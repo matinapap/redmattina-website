@@ -1,0 +1,40 @@
+.home {
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.stage {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(320px, min(57vw, calc((100svh - 208px) * 1508 / 1124)));
+  align-items: start;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  padding: clamp(18px, 3svh, 32px) clamp(24px, 4.5vw, 72px) 0 clamp(20px, 4vw, 64px);
+}
+
+.flipbookSlot {
+  grid-column: 2;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  min-width: 0;
+  height: 100%;
+  min-height: 0;
+}
+
+@media (max-width: 900px) {
+  .stage {
+    grid-template-columns: 1fr;
+    padding-inline: clamp(12px, 4vw, 28px);
+  }
+
+  .flipbookSlot {
+    grid-column: 1;
+    justify-content: center;
+  }
+}

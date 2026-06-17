@@ -1,52 +1,28 @@
-import ImageCard from "@/components/ImageCard";
 import Link from "next/link";
-
-interface GalleryImage {
-  src: string;
-  alt: string;
-  slug: string;
-}
+import ImageCard from "@/components/portfolio/ImageCard";
+import { artworks } from "@/data/artworks";
 
 export default function PortfolioPage() {
-  const images: GalleryImage[] = [
-    {
-      src: "/images/redmattina_main_collage.png",
-      alt: "Work 1",
-      slug: "redmattina-1",
-    },
-    {
-      src: "/images/redmattina_main_collage.png",
-      alt: "Work 2",
-      slug: "redmattina-2",
-    },
-    {
-      src: "/images/a.png",
-      alt: "Work 3",
-      slug: "work-3",
-    },
-    {
-      src: "/images/a.png",
-      alt: "Work 3",
-      slug: "work-3",
-    },
-    {
-      src: "/images/a.png",
-      alt: "Work 3",
-      slug: "work-3",
-    },
-  ];
-
   return (
-    <main className="w-full min-h-screen px-10 pt-10 bg-black text-white">
+    <section className="min-h-full w-full bg-black px-6 py-10 text-white sm:px-10">
       <div className="columns-1 md:columns-2 lg:columns-3 gap-6">
-        {images.map((img) => (
-          <div key={img.slug} className="mb-12 break-inside-avoid">
-            <Link href={`/single_artwork/${img.slug}`}>
-              <ImageCard src={img.src} alt={img.alt} />
+        {artworks.map((artwork) => (
+          <div key={artwork.slug} className="mb-12 break-inside-avoid">
+            <Link
+              href={`/single_artwork/${artwork.slug}`}
+              aria-label={`View ${artwork.title}`}
+            >
+              <ImageCard
+                src={artwork.src}
+                alt={artwork.alt}
+                title={artwork.title}
+                width={artwork.width}
+                height={artwork.height}
+              />
             </Link>
           </div>
         ))}
       </div>
-    </main>
+    </section>
   );
 }

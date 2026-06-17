@@ -1,12 +1,12 @@
 import "../styles/globals.css";
-import Header from "@/components/Header"; 
-import Footer from "@/components/Footer"; 
-
 import type { Metadata } from "next";
+import Footer from "@/components/layout/Footer";
+import Header from "@/components/layout/Header";
+import { siteConfig } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "RedMattina",
-  description: "Under Construction Page",
+  title: siteConfig.name,
+  description: siteConfig.description,
 };
 
 export default function RootLayout({
@@ -16,10 +16,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="flex flex-col min-h-screen font-sans bg-pink-50 text-gray-800">
+      <body className="flex flex-col h-screen font-sans bg-pink-50 text-gray-800">
         {/* 🔹 Header */}
         <Header />
-        <main>
+        <main className="flex-1 min-h-0">
           {children}
         </main>
         {/* 🔹 Footer */}
